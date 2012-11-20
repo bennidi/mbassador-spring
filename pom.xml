@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mbassy</groupId>
     <artifactId>mbassador-spring</artifactId>
-    <version>1.0.0.RC</version>
+    <version>1.0.0.beta</version>
     <packaging>jar</packaging>
-    <name>mbassador-spring-integration</name>
-    <description>Module for integrating MBassador message bus</description>
+    <name>mbassador-spring</name>
+    <description>Module for integrating MBassador message bus in Spring environment.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,6 @@
         <tomcat.version>7.0.25</tomcat.version>
         <hibernate.version>4.0.1.Final</hibernate.version>
         <postgres.version>9.0-801.jdbc4</postgres.version>
-        <project.basedir>file:///home/alex/repository/maven-repository/</project.basedir>
     </properties>
 
     <dependencies>
