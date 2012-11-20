@@ -1,0 +1,11 @@
+# idea project settings #
+*.iml
+
+# Package Files #
+*.war
+*.ear
+
+
+
+# root of compiled classes #
+target/**/*

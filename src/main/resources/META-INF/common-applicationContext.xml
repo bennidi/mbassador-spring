@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+	<!-- The property placeholder processes the application-context.xml and inserts property values as defined by all available
+	property files -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- some of the property files are located in other (non-included) modules -->
+				<value>classpath*:/mbassy-spring.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+	</bean>
+
+	<!-- the common safetynet post processor that does some wiring magic for safetynet components
+	   (e.g. enables eventing and producer support -->
+	<bean class="org.mbassy.spring.BeanEventingProcessor"/>
+
+    <!-- enable aop using aspectj annotations. this will create an auto proxy creator bean post processor
+    that used CGLIB-->
+    <aop:aspectj-autoproxy/>
+
+	<!-- enable annotation driven bean configuration
+		annotation based configuration can be overriden with xml-based definitions-->
+	<context:annotation-config/>
+	<context:component-scan base-package="org.mbassy" scoped-proxy="targetClass"/>
+	<context:spring-configured/>
+
+
+
+
+	<!-- BeanPostProcessor that processes PersistenceUnit and PersistenceContext annotations, for injection of the corresponding JPA resources
+	EntityManagerFactory and EntityManager. Any such annotated fields or methods in any Spring-managed object will automatically be injected. -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+
+
+    <import resource="hibernate-integration.xml" />
+
+</beans>
