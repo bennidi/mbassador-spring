@@ -4,7 +4,7 @@ import org.mbassy.IMessageBus;
 
 /**
  * Created with IntelliJ IDEA.
- * User: benni
+ * @author bennidi
  * Date: 11/12/12
  * Time: 8:47 PM
  * To change this template use File | Settings | File Templates.

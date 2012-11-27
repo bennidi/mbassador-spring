@@ -4,9 +4,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 /**
- * TODO. Insert class description here
+ *
  * <p/>
- * User: benni
+ * @author bennidi
  * Date: 2/8/12
  * Time: 4:08 PM
  */
@@ -19,6 +19,7 @@ public class BeanEventingProcessor  implements BeanPostProcessor{
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String s) throws BeansException {
+        // TODO: rewrite to handle scoped proxies properly
 
 		// exclude scoped proxies
 		// This looks like a quick fix but it is really meant that we only

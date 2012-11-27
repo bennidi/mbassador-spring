@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.concurrent.Executor;
 
 /**
- * User: benni
+ * @author bennidi
  * Date: 11/12/12
  */
 public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPostCommand>{
@@ -24,8 +24,8 @@ public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPo
     }
 
     @Override
-    public void unsubscribe(Object listener) {
-        internalBus.unsubscribe(listener);
+    public boolean unsubscribe(Object listener) {
+        return internalBus.unsubscribe(listener);
     }
 
     public ITransactionalPostCommand post(T event){
@@ -140,12 +140,21 @@ public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPo
 
         @Override
         public void after(Transaction.GenericTransaction txConfig){
-            TransactionSynchronizationManager.registerSynchronization(new DispatchingSynchronization(txConfig, message, Triggered.After));
+            if(TransactionSynchronizationManager.isActualTransactionActive()){
+                TransactionSynchronizationManager.registerSynchronization(new DispatchingSynchronization(txConfig, message, Triggered.After));
+            }else if(txConfig.publishWithoutActiveTransaction()){
+                internalBus.publish(message);
+            }
+
         }
 
         @Override
         public void before(Transaction.UnparametrizedTransaction txConfig) {
-            TransactionSynchronizationManager.registerSynchronization(new DispatchingSynchronization(txConfig, message, Triggered.Before));
+            if(TransactionSynchronizationManager.isActualTransactionActive()){
+                TransactionSynchronizationManager.registerSynchronization(new DispatchingSynchronization(txConfig, message, Triggered.Before));
+            }else if(txConfig.publishWithoutActiveTransaction()){
+                internalBus.publish(message);
+            }
         }
 
 

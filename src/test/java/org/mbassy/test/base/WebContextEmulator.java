@@ -13,7 +13,7 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
  * It merely makes the scopes available such that bean wiring does not throw any exceptions but
  * it does not handle request and session scope creating as defined in the servlet spec.
  * <p/>
- * User: benni
+ * @author bennidi
  * Date: 2/21/12
  * Time: 12:19 PM
  */

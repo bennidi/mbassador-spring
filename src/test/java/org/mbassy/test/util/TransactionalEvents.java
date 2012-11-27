@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: benni
+ * @author bennidi
  * Date: 11/14/12
  */
 public class TransactionalEvents {

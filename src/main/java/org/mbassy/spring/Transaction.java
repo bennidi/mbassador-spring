@@ -1,7 +1,7 @@
 package org.mbassy.spring;
 
 /**
- * User: benni
+ * @author bennidi
  * Date: 11/12/12
  */
 public class Transaction {
@@ -23,7 +23,7 @@ public class Transaction {
 
         private Status status;
 
-        private boolean onlyIfTransactionAvailable = true;
+        private boolean publishWithoutActiveTransaction = false;
 
         public GenericTransaction(Phase phase, Status status) {
             this.phase = phase;
@@ -38,6 +38,10 @@ public class Transaction {
             return status;
         }
 
+        protected boolean publishWithoutActiveTransaction(){
+            return publishWithoutActiveTransaction;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -45,6 +49,7 @@ public class Transaction {
 
             GenericTransaction that = (GenericTransaction) o;
 
+            if (publishWithoutActiveTransaction != that.publishWithoutActiveTransaction) return false;
             if (phase != that.phase) return false;
             if (status != that.status) return false;
 
@@ -55,11 +60,12 @@ public class Transaction {
         public int hashCode() {
             int result = phase != null ? phase.hashCode() : 0;
             result = 31 * result + (status != null ? status.hashCode() : 0);
+            result = 31 * result + (publishWithoutActiveTransaction ? 1 : 0);
             return result;
         }
 
         public T OrIfNoTransactionAvailable(){
-            onlyIfTransactionAvailable = false;
+            publishWithoutActiveTransaction = true;
             return (T)this;
         }
     }

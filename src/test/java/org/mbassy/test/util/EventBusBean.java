@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Custom Transaction Event Bus configured as Spring bean
- * User: benni
+ * @author bennidi
  * Date: 11/20/12
  */
 @Service

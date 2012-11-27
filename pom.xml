@@ -16,7 +16,6 @@
         <aspectj.version>1.6.12</aspectj.version>
         <tomcat.version>7.0.25</tomcat.version>
         <hibernate.version>4.0.1.Final</hibernate.version>
-        <postgres.version>9.0-801.jdbc4</postgres.version>
     </properties>
 
     <dependencies>
@@ -37,7 +36,7 @@
         <dependency>
             <groupId>org.mbassy</groupId>
             <artifactId>mbassador</artifactId>
-            <version>1.0.0.RC</version>
+            <version>1.0.1.RC</version>
         </dependency>
 
         <dependency>
@@ -115,6 +114,7 @@
 
         <!--
             Dependency used for testing only
+            The ORM provides transaction manager for creation of transactions
         -->
 
         <dependency>

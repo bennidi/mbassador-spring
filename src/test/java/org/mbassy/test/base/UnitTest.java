@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Random;
 
 /**
- * User: benni
+ * @author bennidi
  * Date: 2/2/12
  * Time: 5:36 PM
  */

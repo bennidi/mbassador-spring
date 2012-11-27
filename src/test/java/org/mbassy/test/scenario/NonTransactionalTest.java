@@ -2,16 +2,15 @@ package org.mbassy.test.scenario;
 
 import org.junit.Test;
 import org.mbassy.spring.Transaction;
-import org.mbassy.test.base.SpringAwareUnitTest;
-import org.mbassy.test.scenario.BaseTest;
-import org.mbassy.test.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mbassy.test.util.ExpectedMessagesListener;
+import org.mbassy.test.util.Outcome;
+import org.mbassy.test.util.TransactionalEvents;
 
 /**
  * @author bennidi
  * Date: 11/12/12
  */
-public class TransactionCommitSuccessfulTest extends BaseTest {
+public class NonTransactionalTest extends BaseTest {
 
 
     @Test
@@ -21,8 +20,9 @@ public class TransactionCommitSuccessfulTest extends BaseTest {
         Object transactionCommitted = new Object();
         Object transactionCompleted = new Object();
 
-        eventsToPublish.after(Transaction.Commit(), transactionCommitted);
-        eventsToPublish.before(Transaction.Completion(), transactionCompleted);
+        eventsToPublish.after(Transaction.Commit().OrIfNoTransactionAvailable(), transactionCommitted);
+        eventsToPublish.before(Transaction.Completion().OrIfNoTransactionAvailable(), transactionCompleted);
+        eventsToPublish.before(Transaction.Completion(), new Object());
 
         ExpectedMessagesListener listener = new ExpectedMessagesListener()
                 .addExpectedMessage(transactionCommitted)
@@ -30,7 +30,7 @@ public class TransactionCommitSuccessfulTest extends BaseTest {
 
         bus.subscribe(listener);
 
-        bean.runTransactional(eventsToPublish, Outcome.Commit);
+        bean.runWithoutTransaction(eventsToPublish);
 
         listener.validate();
 

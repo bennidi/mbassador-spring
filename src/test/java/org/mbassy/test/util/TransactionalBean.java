@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * User: benni
+ * @author bennidi
  * Date: 11/12/12
  */
 @Service
@@ -43,5 +43,9 @@ public class TransactionalBean {
         for(Transaction.GenericTransaction tx : events.getAfter()){
             bus.post(events.getExpectedMessage(tx)).after(tx);
         }
+    }
+
+    public void runWithoutTransaction(TransactionalEvents events){
+        postExpectedMessages(events);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created with IntelliJ IDEA.
- * User: benni
+ * @author bennidi
  * Date: 11/12/12
  * Time: 8:09 PM
  * To change this template use File | Settings | File Templates.

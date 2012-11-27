@@ -11,7 +11,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * User: benni
+ * @author bennidi
  * Date: 2/2/12
  * Time: 5:36 PM
  */
