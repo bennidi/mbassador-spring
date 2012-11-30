@@ -8,6 +8,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import java.util.Collection;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author bennidi
@@ -16,6 +17,18 @@ import java.util.concurrent.Executor;
 public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPostCommand>{
 
     private MBassador<T> internalBus = new MBassador<T>();
+
+    public TransactionalEventBus(){
+        internalBus = new MBassador<T>();
+    }
+
+    public TransactionalEventBus(int dispatcherThreadCount){
+        internalBus = new MBassador<T>(dispatcherThreadCount);
+    }
+
+    public TransactionalEventBus(int dispatcherThreadCount, ExecutorService executor){
+        internalBus = new MBassador<T>(dispatcherThreadCount, executor);
+    }
 
 
     @Override
