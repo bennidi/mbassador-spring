@@ -1,5 +1,6 @@
 package org.mbassy.spring;
 
+import org.mbassy.BusConfiguration;
 import org.mbassy.IMessageBus;
 import org.mbassy.IPublicationErrorHandler;
 import org.mbassy.MBassador;
@@ -16,18 +17,10 @@ import java.util.concurrent.ExecutorService;
  */
 public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPostCommand>{
 
-    private MBassador<T> internalBus = new MBassador<T>();
+    private MBassador<T> internalBus;
 
     public TransactionalEventBus(){
-        internalBus = new MBassador<T>();
-    }
-
-    public TransactionalEventBus(int dispatcherThreadCount){
-        internalBus = new MBassador<T>(dispatcherThreadCount);
-    }
-
-    public TransactionalEventBus(int dispatcherThreadCount, ExecutorService executor){
-        internalBus = new MBassador<T>(dispatcherThreadCount, executor);
+        internalBus = new MBassador<T>(BusConfiguration.Default());
     }
 
 
