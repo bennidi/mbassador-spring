@@ -53,6 +53,21 @@ public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPo
         return internalBus.getExecutor();
     }
 
+    @Override
+    public boolean isShutdown() {
+        return internalBus.isShutdown();
+    }
+
+    @Override
+    public void shutdown() {
+        internalBus.shutdown();
+    }
+
+    @Override
+    public boolean hasPendingMessages() {
+        return internalBus.hasPendingMessages();
+    }
+
     private static enum Triggered {
         Before, After;
     }
