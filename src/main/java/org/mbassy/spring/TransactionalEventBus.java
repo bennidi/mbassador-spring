@@ -54,16 +54,6 @@ public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPo
     }
 
     @Override
-    public boolean isShutdown() {
-        return internalBus.isShutdown();
-    }
-
-    @Override
-    public void shutdown() {
-        internalBus.shutdown();
-    }
-
-    @Override
     public boolean hasPendingMessages() {
         return internalBus.hasPendingMessages();
     }
