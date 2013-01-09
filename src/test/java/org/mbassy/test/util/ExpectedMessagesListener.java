@@ -1,7 +1,7 @@
 package org.mbassy.test.util;
 
 import org.junit.Assert;
-import org.mbassy.listener.Listener;
+import net.engio.mbassy.listener.Listener;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,6 +1,6 @@
 package org.mbassy.spring;
 
-import org.mbassy.IMessageBus;
+import net.engio.mbassy.IMessageBus;
 
 /**
  * Created with IntelliJ IDEA.

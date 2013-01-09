@@ -1,21 +1,18 @@
 package org.mbassy.spring;
 
-import org.mbassy.BusConfiguration;
-import org.mbassy.IMessageBus;
-import org.mbassy.IPublicationErrorHandler;
-import org.mbassy.MBassador;
+import net.engio.mbassy.*;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.Collection;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author bennidi
  * Date: 11/12/12
  */
-public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPostCommand>{
+public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPostCommand> {
 
     private MBassador<T> internalBus;
 
@@ -145,8 +142,13 @@ public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPo
             internalBus.publish(message);
         }
 
-        public void asynchronously(){
-            internalBus.publishAsync(message);
+        public MessagePublication asynchronously(){
+            return internalBus.publishAsync(message);
+        }
+
+        @Override
+        public MessagePublication asynchronously(long timeout, TimeUnit unit) {
+            return internalBus.publishAsync(message, timeout, unit);
         }
 
         @Override
