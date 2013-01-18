@@ -1,4 +1,4 @@
-package org.mbassy.test.scenario;
+package org.mbassy.test.scenario.transactional;
 
 import org.junit.Test;
 import org.mbassy.spring.Transaction;

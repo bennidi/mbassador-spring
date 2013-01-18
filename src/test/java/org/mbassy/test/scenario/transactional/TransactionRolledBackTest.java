@@ -1,8 +1,9 @@
-package org.mbassy.test.scenario;
+package org.mbassy.test.scenario.transactional;
 
 import org.junit.Test;
 import org.mbassy.spring.Transaction;
 import org.mbassy.test.base.SpringAwareUnitTest;
+import org.mbassy.test.scenario.BaseTest;
 import org.mbassy.test.util.TransactionalBean;
 import org.mbassy.test.util.EventBusBean;
 import org.mbassy.test.util.ExpectedMessagesListener;
