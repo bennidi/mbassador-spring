@@ -1,6 +1,10 @@
 package org.mbassy.spring;
 
 import net.engio.mbassy.*;
+import net.engio.mbassy.bus.BusConfiguration;
+import net.engio.mbassy.bus.IMessageBus;
+import net.engio.mbassy.bus.MBassador;
+import net.engio.mbassy.bus.MessagePublication;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 

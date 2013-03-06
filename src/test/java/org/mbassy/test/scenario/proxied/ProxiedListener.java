@@ -1,6 +1,6 @@
 package org.mbassy.test.scenario.proxied;
 
-import net.engio.mbassy.listener.Listener;
+import net.engio.mbassy.listener.Handler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ public class ProxiedListener {
 
     private String uuid = UUID.randomUUID().toString();
 
-    @Listener
+    @Handler
     public void handle(SimpleMessage message){
       message.markReceived(uuid);
     }

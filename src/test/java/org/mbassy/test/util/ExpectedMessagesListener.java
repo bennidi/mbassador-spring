@@ -1,7 +1,7 @@
 package org.mbassy.test.util;
 
 import org.junit.Assert;
-import net.engio.mbassy.listener.Listener;
+import net.engio.mbassy.listener.Handler;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class ExpectedMessagesListener {
         return this;
     }
 
-    @Listener
+    @Handler
     public void handle(Object message){
         handledMessages.add(message);
     }
