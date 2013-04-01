@@ -1,6 +1,7 @@
 package org.mbassy.test.scenario.proxied;
 
-import net.engio.mbassy.common.ConcurrentSet;
+import net.engio.mbassy.common.IConcurrentSet;
+import net.engio.mbassy.common.StrongConcurrentSet;
 
 /**
  * Simple message that can keep track of its receivers.
@@ -11,7 +12,7 @@ import net.engio.mbassy.common.ConcurrentSet;
 public class SimpleMessage {
 
 
-    private ConcurrentSet receivers = new ConcurrentSet();
+    private IConcurrentSet receivers = new StrongConcurrentSet();
 
 
     public void markReceived(Object receiver){
