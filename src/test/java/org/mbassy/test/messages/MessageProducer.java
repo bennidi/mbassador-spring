@@ -1,4 +1,4 @@
-package org.mbassy.test.util;
+package org.mbassy.test.messages;
 
 import org.mbassy.spring.Transaction;
 
@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * The message producer is configured with a set of messages - each message being scheduled for publication
+ * under certain conditions (transactional).
+ *
  * @author bennidi
  * Date: 11/14/12
  */
-public class TransactionalEvents {
+public class MessageProducer {
 
     private Map<Transaction.GenericTransaction, Object> expectedMessages = new HashMap<Transaction.GenericTransaction, Object>();
 
@@ -30,13 +34,13 @@ public class TransactionalEvents {
     }
 
 
-    public TransactionalEvents after(Transaction.GenericTransaction transaction, Object expectedMessage){
+    public MessageProducer after(Transaction.GenericTransaction transaction, Object expectedMessage){
         after.add(transaction);
         expectedMessages.put(transaction, expectedMessage);
         return this;
     }
 
-    public TransactionalEvents before(Transaction.UnparametrizedTransaction transaction, Object expectedMessage){
+    public MessageProducer before(Transaction.UnparametrizedTransaction transaction, Object expectedMessage){
         before.add(transaction);
         expectedMessages.put(transaction, expectedMessage);
         return this;

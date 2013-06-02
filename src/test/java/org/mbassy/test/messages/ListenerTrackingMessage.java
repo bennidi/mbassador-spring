@@ -1,4 +1,4 @@
-package org.mbassy.test.scenario.proxied;
+package org.mbassy.test.messages;
 
 import net.engio.mbassy.common.IConcurrentSet;
 import net.engio.mbassy.common.StrongConcurrentSet;
@@ -9,7 +9,7 @@ import net.engio.mbassy.common.StrongConcurrentSet;
  * @author bennidi
  *         Date: 1/18/13
  */
-public class SimpleMessage {
+public class ListenerTrackingMessage {
 
 
     private IConcurrentSet receivers = new StrongConcurrentSet();

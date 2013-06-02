@@ -2,9 +2,8 @@ package org.mbassy.test.scenario;
 
 import org.junit.Test;
 import org.mbassy.spring.Transaction;
-import org.mbassy.test.util.ExpectedMessagesListener;
-import org.mbassy.test.util.Outcome;
-import org.mbassy.test.util.TransactionalEvents;
+import org.mbassy.test.listeners.MessageTrackingListener;
+import org.mbassy.test.messages.MessageProducer;
 
 /**
  * @author bennidi
@@ -16,7 +15,7 @@ public class NonTransactionalTest extends BaseTest {
     @Test
     public void scenario1(){
 
-        TransactionalEvents eventsToPublish = new TransactionalEvents();
+        MessageProducer eventsToPublish = new MessageProducer();
         Object transactionCommitted = new Object();
         Object transactionCompleted = new Object();
 
@@ -24,13 +23,13 @@ public class NonTransactionalTest extends BaseTest {
         eventsToPublish.before(Transaction.Completion().OrIfNoTransactionAvailable(), transactionCompleted);
         eventsToPublish.before(Transaction.Completion(), new Object());
 
-        ExpectedMessagesListener listener = new ExpectedMessagesListener()
+        MessageTrackingListener listener = new MessageTrackingListener()
                 .addExpectedMessage(transactionCommitted)
                 .addExpectedMessage(transactionCompleted);
 
         bus.subscribe(listener);
 
-        bean.runWithoutTransaction(eventsToPublish);
+        bean.postMessagesWithTransaction(eventsToPublish);
 
         listener.validate();
 

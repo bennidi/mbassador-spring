@@ -6,8 +6,6 @@ package org.mbassy.spring;
  */
 public class Transaction {
 
-    public static int OrIfNotTransationAvailable = 10;
-
     public enum Phase {
         Commit, Completion;
     }
@@ -71,9 +69,6 @@ public class Transaction {
     }
 
     public static class UnparametrizedTransaction extends GenericTransaction<UnparametrizedTransaction>{
-
-        private Phase phase;
-
 
         public UnparametrizedTransaction(Phase phase) {
             super(phase, null);

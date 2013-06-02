@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit;
  * @author bennidi
  * Date: 11/12/12
  */
-public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPostCommand> {
+public class TransactionalMessageBus<T> implements IMessageBus<T, ITransactionalPostCommand> {
 
     private MBassador<T> internalBus;
 
-    public TransactionalEventBus(){
+    public TransactionalMessageBus(){
         internalBus = new MBassador<T>(BusConfiguration.Default());
     }
 
@@ -33,6 +33,11 @@ public class TransactionalEventBus<T> implements IMessageBus<T, ITransactionalPo
     @Override
     public boolean unsubscribe(Object listener) {
         return internalBus.unsubscribe(listener);
+    }
+
+    @Override
+    public void publish(T message) {
+        internalBus.publish(message);
     }
 
     public ITransactionalPostCommand post(T event){

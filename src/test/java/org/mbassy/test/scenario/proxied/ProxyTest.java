@@ -1,7 +1,8 @@
 package org.mbassy.test.scenario.proxied;
 
 import org.junit.Test;
-import org.mbassy.test.base.UnitTest;
+import org.mbassy.test.listeners.ProxiedListener;
+import org.mbassy.test.messages.ListenerTrackingMessage;
 import org.mbassy.test.scenario.BaseTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,7 +21,7 @@ public class ProxyTest extends BaseTest{
     @Test
     public void testProxied(){
         bus.subscribe(listener);
-        SimpleMessage message = new SimpleMessage();
+        ListenerTrackingMessage message = new ListenerTrackingMessage();
         System.out.println(listener.getClass());
         assertFalse(message.isReceiver(listener.getUuid()));
         bus.post(message).now();

@@ -1,7 +1,7 @@
 package org.mbassy.test.scenario;
 
 import org.mbassy.test.base.SpringAwareUnitTest;
-import org.mbassy.test.util.EventBusBean;
+import org.mbassy.test.util.MessageBusBean;
 import org.mbassy.test.util.TransactionalBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,5 +18,5 @@ public class BaseTest extends SpringAwareUnitTest {
     protected TransactionalBean bean;
 
     @Autowired
-    protected EventBusBean bus;
+    protected MessageBusBean bus;
 }

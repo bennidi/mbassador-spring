@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.mbassy.test.scenario.NonTransactionalTest;
 import org.mbassy.test.scenario.proxied.ProxyTest;
 import org.mbassy.test.scenario.transactional.TransactionCommitSuccessfulTest;
-import org.mbassy.test.scenario.transactional.TransactionRolledBackTest;
+import org.mbassy.test.scenario.TransactionRolledBackTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

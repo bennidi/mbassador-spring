@@ -1,15 +1,10 @@
-package org.mbassy.test.scenario.transactional;
+package org.mbassy.test.scenario;
 
 import org.junit.Test;
 import org.mbassy.spring.Transaction;
-import org.mbassy.test.base.SpringAwareUnitTest;
-import org.mbassy.test.scenario.BaseTest;
-import org.mbassy.test.util.TransactionalBean;
-import org.mbassy.test.util.EventBusBean;
-import org.mbassy.test.util.ExpectedMessagesListener;
+import org.mbassy.test.listeners.MessageTrackingListener;
+import org.mbassy.test.messages.MessageProducer;
 import org.mbassy.test.util.Outcome;
-import org.mbassy.test.util.TransactionalEvents;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,9 +17,31 @@ public class TransactionRolledBackTest extends BaseTest {
 
 
     @Test
+    public void scenario1(){
+
+        MessageProducer eventsToPublish = new MessageProducer();
+        Object transactionCommitted = new Object();
+        Object transactionCompleted = new Object();
+
+        eventsToPublish.after(Transaction.Commit(), transactionCommitted);
+        eventsToPublish.before(Transaction.Completion(), transactionCompleted);
+
+        MessageTrackingListener listener = new MessageTrackingListener()
+                .addExpectedMessage(transactionCommitted)
+                .addExpectedMessage(transactionCompleted);
+
+        bus.subscribe(listener);
+
+        bean.postMessageTransactional(eventsToPublish, Outcome.Commit);
+
+        listener.validate();
+
+    }
+
+    @Test
     public void transactionRolledBack(){
 
-        TransactionalEvents eventsToPublish = new TransactionalEvents();
+        MessageProducer eventsToPublish = new MessageProducer();
         Object rolledBack = new Object();
         Object beforeCompletion = new Object();
 
@@ -35,13 +52,13 @@ public class TransactionRolledBackTest extends BaseTest {
         eventsToPublish.after(Transaction.Completed().successfully(), new Object());
         eventsToPublish.after(Transaction.Commit(), new Object());
 
-        ExpectedMessagesListener listener = new ExpectedMessagesListener()
+        MessageTrackingListener listener = new MessageTrackingListener()
                 .addExpectedMessage(rolledBack)
                 .addExpectedMessage(beforeCompletion);
 
         bus.subscribe(listener);
         try{
-            bean.runTransactional(eventsToPublish, Outcome.Rollback);
+            bean.postMessageTransactional(eventsToPublish, Outcome.Rollback);
         }
         catch (Exception e){
             //expected exception rolls back transaction

@@ -1,4 +1,4 @@
-package org.mbassy.test.util;
+package org.mbassy.test.listeners;
 
 import org.junit.Assert;
 import net.engio.mbassy.listener.Handler;
@@ -7,25 +7,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
-* Created with IntelliJ IDEA.
+*
+ * This listener can be used to keep track of all messages published to a message bus.
+ *
 * @author bennidi
-* Date: 11/20/12
-* Time: 1:09 PM
-* To change this template use File | Settings | File Templates.
 */
-public class ExpectedMessagesListener {
+public class MessageTrackingListener {
 
     private Set<Object> expectedMessages = new HashSet<Object>();
 
     private Set<Object> handledMessages = new HashSet<Object>();
 
-    public ExpectedMessagesListener addExpectedMessage(Object message){
+    public MessageTrackingListener addExpectedMessage(Object message){
         expectedMessages.add(message);
         return this;
     }
 
     @Handler
-    public void handle(Object message){
+    public synchronized void handle(Object message){
         handledMessages.add(message);
     }
 

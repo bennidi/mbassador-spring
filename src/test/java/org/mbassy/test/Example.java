@@ -20,6 +20,8 @@ public class Example extends BaseTest{
        // post the object only if a transaction exists and commits succesfully
        bus.post(new Object()).after(Transaction.Completed().successfully());
 
+       bus.post(new Object()).after(Transaction.Completion().OrIfNoTransactionAvailable());
+
         // post the object before transaction completes (regardless of status) or immediately
         // if none is present
        bus.post(new Object()).before(Transaction.Completion().OrIfNoTransactionAvailable());
