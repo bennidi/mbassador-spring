@@ -1,4 +1,4 @@
-package org.mbassy.test.scenario.proxied;
+package org.mbassy.test.scenario;
 
 import org.junit.Test;
 import org.mbassy.test.listeners.ProxiedListener;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author bennidi
  *         Date: 1/18/13
  */
-public class ProxyTest extends BaseTest{
+public class ProxiedListenerTest extends BaseTest{
 
     @Autowired
     private ProxiedListener listener;
@@ -21,8 +21,9 @@ public class ProxyTest extends BaseTest{
     @Test
     public void testProxied(){
         bus.subscribe(listener);
+        boolean isProxy = listener.getClass().getCanonicalName().indexOf("CGLIB") > -1;
+        assertTrue(isProxy);
         ListenerTrackingMessage message = new ListenerTrackingMessage();
-        System.out.println(listener.getClass());
         assertFalse(message.isReceiver(listener.getUuid()));
         bus.post(message).now();
         assertTrue(message.isReceiver(listener.getUuid()));

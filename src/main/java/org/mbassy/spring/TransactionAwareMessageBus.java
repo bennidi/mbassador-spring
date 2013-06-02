@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit;
  * @author bennidi
  * Date: 11/12/12
  */
-public class TransactionalMessageBus<T> implements IMessageBus<T, ITransactionalPostCommand> {
+public class TransactionAwareMessageBus<T> implements IMessageBus<T, ITransactionalPostCommand> {
 
     private MBassador<T> internalBus;
 
-    public TransactionalMessageBus(){
+    public TransactionAwareMessageBus(){
         internalBus = new MBassador<T>(BusConfiguration.Default());
     }
 

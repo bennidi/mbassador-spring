@@ -19,9 +19,6 @@
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>
 	</bean>
 
-	<!-- the common safetynet post processor that does some wiring magic for safetynet components
-	   (e.g. enables eventing and producer support -->
-	<bean class="org.mbassy.spring.BeanEventingProcessor"/>
 
     <!-- enable aop using aspectj annotations. this will create an auto proxy creator bean post processor
     that used CGLIB-->

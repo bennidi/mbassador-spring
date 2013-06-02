@@ -3,16 +3,14 @@ package org.mbassy.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.mbassy.test.scenario.NonTransactionalTest;
-import org.mbassy.test.scenario.proxied.ProxyTest;
-import org.mbassy.test.scenario.transactional.TransactionCommitSuccessfulTest;
-import org.mbassy.test.scenario.TransactionRolledBackTest;
+import org.mbassy.test.scenario.ProxiedListenerTest;
+import org.mbassy.test.scenario.TransactionalTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TransactionCommitSuccessfulTest.class,
-        TransactionRolledBackTest.class,
+        TransactionalTest.class,
         NonTransactionalTest.class,
-        ProxyTest.class
+        ProxiedListenerTest.class
 })
 public class AllTests {
 }

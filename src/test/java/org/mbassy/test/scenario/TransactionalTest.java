@@ -7,33 +7,29 @@ import org.mbassy.test.messages.MessageProducer;
 import org.mbassy.test.util.Outcome;
 
 /**
- * Created with IntelliJ IDEA.
  * @author bennidi
  * Date: 11/12/12
- * Time: 8:09 PM
- * To change this template use File | Settings | File Templates.
+ *
  */
-public class TransactionRolledBackTest extends BaseTest {
+public class TransactionalTest extends BaseTest {
 
 
     @Test
-    public void scenario1(){
+    public void transactionCommit(){
 
-        MessageProducer eventsToPublish = new MessageProducer();
+        MessageProducer scheduledMessages = new MessageProducer();
         Object transactionCommitted = new Object();
         Object transactionCompleted = new Object();
 
-        eventsToPublish.after(Transaction.Commit(), transactionCommitted);
-        eventsToPublish.before(Transaction.Completion(), transactionCompleted);
+        scheduledMessages.after(Transaction.Commit(), transactionCommitted);
+        scheduledMessages.before(Transaction.Completion(), transactionCompleted);
 
+        // check publication with successful commit
         MessageTrackingListener listener = new MessageTrackingListener()
                 .addExpectedMessage(transactionCommitted)
                 .addExpectedMessage(transactionCompleted);
-
         bus.subscribe(listener);
-
-        bean.postMessageTransactional(eventsToPublish, Outcome.Commit);
-
+        bean.postMessageTransactional(scheduledMessages, Outcome.Commit);
         listener.validate();
 
     }
@@ -59,6 +55,7 @@ public class TransactionRolledBackTest extends BaseTest {
         bus.subscribe(listener);
         try{
             bean.postMessageTransactional(eventsToPublish, Outcome.Rollback);
+            fail();
         }
         catch (Exception e){
             //expected exception rolls back transaction

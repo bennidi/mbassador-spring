@@ -1,6 +1,6 @@
 package org.mbassy.test.util;
 
-import org.mbassy.spring.TransactionalMessageBus;
+import org.mbassy.spring.TransactionAwareMessageBus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
  * Date: 11/20/12
  */
 @Service
-public class MessageBusBean extends TransactionalMessageBus {
+public class MessageBusBean extends TransactionAwareMessageBus {
 }
