@@ -5,9 +5,13 @@ CDI-like transactional events in Spring!
 Use MBassador in Spring environment. Supports conditional message dispatch (e.g. after or before {commit|rollback}) based
 on Springs TransactionSynchronization.
 
-This project is currently in beta but is planned to be continuously improved to create a stable release soon. The functionality
-to synchronize with spring managed transactions is implemented completely but it lacks a great deal of testing. Please download
-and test this mbassador extension for your use cases and provide me with feedback and test cases. I think that declarative transactional
+This project is currently in beta but is planned to be continuously improved to create a stable release. The functionality
+to synchronize the message dispatch with spring managed transactions is implemented completely but still lacks a great deal of testing.
+
+For the declaration of transactional conditions on the message listeners a solution is still to be found. Most likely, a specific
+class that wraps the message can be used (similar to EnvelopedMessage in standard mbassador).
+
+Please download and test this mbassador extension for your use cases and provide me with feedback and test cases. I think that declarative transactional
 event listeners would be a great addition to the spring ecosystem (of which I am a great fan).
 
 
