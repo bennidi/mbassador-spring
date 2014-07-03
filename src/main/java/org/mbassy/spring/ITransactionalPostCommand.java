@@ -1,15 +1,13 @@
 package org.mbassy.spring;
 
-import net.engio.mbassy.bus.IMessageBus;
+
+import net.engio.mbassy.bus.publication.ISyncAsyncPublicationCommand;
 
 /**
- * Created with IntelliJ IDEA.
- * @author bennidi
- * Date: 11/12/12
- * Time: 8:47 PM
- * To change this template use File | Settings | File Templates.
+ * Extension interface for the publish method of the message bus interface.
+ * Supports publication based on transaction outcomes
  */
-public interface ITransactionalPostCommand extends IMessageBus.IPostCommand{
+public interface ITransactionalPostCommand extends ISyncAsyncPublicationCommand{
 
     public void after(Transaction.GenericTransaction condition);
 

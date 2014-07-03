@@ -1,10 +1,11 @@
 package org.mbassy.spring;
 
-import net.engio.mbassy.*;
-import net.engio.mbassy.bus.BusConfiguration;
-import net.engio.mbassy.bus.IMessageBus;
+import net.engio.mbassy.bus.BusRuntime;
 import net.engio.mbassy.bus.MBassador;
 import net.engio.mbassy.bus.MessagePublication;
+import net.engio.mbassy.bus.common.IMessageBus;
+import net.engio.mbassy.bus.config.BusConfiguration;
+import net.engio.mbassy.bus.error.IPublicationErrorHandler;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
@@ -67,6 +68,11 @@ public class TransactionAwareMessageBus<T> implements IMessageBus<T, ITransactio
     @Override
     public void shutdown() {
         internalBus.shutdown();
+    }
+
+    @Override
+    public BusRuntime getRuntime() {
+        return internalBus.getRuntime();
     }
 
     private static enum Triggered {
@@ -160,7 +166,6 @@ public class TransactionAwareMessageBus<T> implements IMessageBus<T, ITransactio
             return internalBus.publishAsync(message);
         }
 
-        @Override
         public MessagePublication asynchronously(long timeout, TimeUnit unit) {
             return internalBus.publishAsync(message, timeout, unit);
         }
