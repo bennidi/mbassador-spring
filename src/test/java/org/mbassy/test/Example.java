@@ -4,8 +4,6 @@ import org.mbassy.spring.Transaction;
 import org.mbassy.test.scenario.BaseTest;
 
 /**
- * Todo: Add javadoc
- *
  * @author bennidi
  *         Date: 11/27/12
  */
@@ -43,9 +41,6 @@ public class Example extends BaseTest {
         // compile error: the outcome is only available after completion so its not possible to refer
         // to any transaction specific outcome when scheduling a message to be published in "Before"-Phase
         //bus.post(new Object()).before(Transaction.Completed().successfully());
-
-
-
 
     }
 

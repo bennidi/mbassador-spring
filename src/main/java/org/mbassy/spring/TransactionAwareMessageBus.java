@@ -1,16 +1,14 @@
 package org.mbassy.spring;
 
 import net.engio.mbassy.bus.BusRuntime;
+import net.engio.mbassy.bus.IMessagePublication;
 import net.engio.mbassy.bus.MBassador;
-import net.engio.mbassy.bus.MessagePublication;
 import net.engio.mbassy.bus.common.IMessageBus;
-import net.engio.mbassy.bus.config.BusConfiguration;
 import net.engio.mbassy.bus.error.IPublicationErrorHandler;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.Collection;
-import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,7 +20,7 @@ public class TransactionAwareMessageBus<T> implements IMessageBus<T, ITransactio
     private MBassador<T> internalBus;
 
     public TransactionAwareMessageBus(){
-        internalBus = new MBassador<T>(BusConfiguration.Default());
+        internalBus = new MBassador<T>();
     }
 
 
@@ -46,18 +44,8 @@ public class TransactionAwareMessageBus<T> implements IMessageBus<T, ITransactio
     }
 
     @Override
-    public void addErrorHandler(IPublicationErrorHandler errorHandler) {
-        internalBus.addErrorHandler(errorHandler);
-    }
-
-    @Override
     public Collection<IPublicationErrorHandler> getRegisteredErrorHandlers() {
         return internalBus.getRegisteredErrorHandlers();
-    }
-
-    @Override
-    public Executor getExecutor() {
-        return internalBus.getExecutor();
     }
 
     @Override
@@ -162,11 +150,11 @@ public class TransactionAwareMessageBus<T> implements IMessageBus<T, ITransactio
             internalBus.publish(message);
         }
 
-        public MessagePublication asynchronously(){
+        public IMessagePublication asynchronously(){
             return internalBus.publishAsync(message);
         }
 
-        public MessagePublication asynchronously(long timeout, TimeUnit unit) {
+        public IMessagePublication asynchronously(long timeout, TimeUnit unit) {
             return internalBus.publishAsync(message, timeout, unit);
         }
 

@@ -1,7 +1,8 @@
 package org.mbassy.test.messages;
 
-import net.engio.mbassy.common.IConcurrentSet;
 import net.engio.mbassy.common.StrongConcurrentSet;
+
+import java.util.Collection;
 
 /**
  * Simple message that can keep track of its receivers.
@@ -12,7 +13,7 @@ import net.engio.mbassy.common.StrongConcurrentSet;
 public class ListenerTrackingMessage {
 
 
-    private IConcurrentSet receivers = new StrongConcurrentSet();
+    private Collection receivers = new StrongConcurrentSet();
 
 
     public void markReceived(Object receiver){
