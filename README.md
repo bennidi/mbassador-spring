@@ -1,5 +1,7 @@
 mbassador-spring
 ================
+[![Build Status](https://travis-ci.org/bennidi/mbassador-spring.svg?branch=master)](https://travis-ci.org/bennidi/mbassador-spring)
+
 CDI-like transactional events in Spring!
 
 Use MBassador in Spring environment. Supports conditional message dispatch (e.g. after or before {commit|rollback}) based
