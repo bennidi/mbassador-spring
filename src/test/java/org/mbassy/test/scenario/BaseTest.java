@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Time: 1:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class BaseTest extends SpringAwareUnitTest {
+abstract public class BaseTest extends SpringAwareUnitTest {
 
     @Autowired
     protected TransactionalBean bean;

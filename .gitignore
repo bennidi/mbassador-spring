@@ -1,6 +1,10 @@
 # idea project settings #
 *.iml
 
+.classpath
+.project
+.settings/
+
 # Package Files #
 *.war
 *.ear
