@@ -18,7 +18,8 @@ event listeners would be a great addition to the spring ecosystem (of which I am
 
 
 <h2>Usage</h2>
-```
+
+```java
 // post the object only if a transaction exists and completes with rollback
 bus.post(new Object()).after(Transaction.Completed().withRollBack());
 
@@ -46,5 +47,4 @@ bus.post(new Object()).before(Transaction.Completion().OrIfNoTransactionAvailabl
 // compile error: the outcome is only available after completion so its not possible to refer
 // to any transaction specific outcome when scheduling a message to be published in "Before"-Phase
 //bus.post(new Object()).before(Transaction.Completed().successfully());
-
 ```
